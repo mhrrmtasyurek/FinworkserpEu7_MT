@@ -18,7 +18,7 @@ Feature: User should be able to login
       | posmanager10@info.com | password   |
       | username              | posmanager |
 
-  @wip
+
   Scenario Outline:
     When the user enters the invalid_empty "<userName>" or "<passWord>"
     Then the user should get caution message "Lütfen bu alanı doldurun."

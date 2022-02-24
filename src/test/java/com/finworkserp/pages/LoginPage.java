@@ -28,4 +28,19 @@ public class LoginPage extends BasePage{
         password.sendKeys(passwordStr);
         logIn.click();
 }
+
+    @FindBy(xpath = "//span[@class='oe_topbar_name']")
+    public WebElement actualUserName;
+
+    @FindBy(xpath = "//a[@data-menu='logout']")
+    public WebElement logOutLink;
+
+    @FindBy(linkText = "My User")
+    public WebElement myUser;
+
+    public void logOut(){
+        BrowserUtils.waitFor(2);
+        BrowserUtils.clickWithJS(actualUserName);
+        BrowserUtils.clickWithJS(logOutLink);
+    }
     }
