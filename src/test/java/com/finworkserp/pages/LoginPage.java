@@ -20,6 +20,9 @@ public class LoginPage extends BasePage{
     @FindBy(css =".btn-primary")
     public WebElement logIn;
 
+    @FindBy(linkText = "Reset Password")
+    public WebElement resetPasswordButton;
+
     @FindBy(tagName = "p")
     public WebElement error_message;
 
@@ -35,8 +38,6 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//a[@data-menu='logout']")
     public WebElement logOutLink;
 
-    @FindBy(linkText = "My User")
-    public WebElement myUser;
 
     public void logOut(){
         BrowserUtils.waitFor(2);

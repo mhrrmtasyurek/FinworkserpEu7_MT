@@ -1,15 +1,13 @@
 package com.finworkserp.stepDefinitions;
 
 import com.finworkserp.pages.LoginPage;
-import com.finworkserp.utilities.BrowserUtils;
 import com.finworkserp.utilities.ConfigurationReader;
 import com.finworkserp.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
+
 
 public class LoginStepDefs {
     @Given("the user is on the login page")
@@ -24,6 +22,17 @@ public class LoginStepDefs {
 
         LoginPage loginPage = new LoginPage();
         loginPage.login(username, password);
+    }
+    @When("the user should enter valid {string} and valid {string}")
+    public void theUserShouldEnterValidAndValid(String userName,String password) {
+
+        LoginPage loginPage = new LoginPage();
+        loginPage.login(userName,password);
+    }
+
+    @Then("the user should able to get actual {string}")
+    public void the_user_should_able_to_get_actual(String expectedUserType) {
+        Assert.assertEquals(expectedUserType,new LoginPage().actualUserName.getText().trim());
     }
 
     @When("the user enters the invalid_empty {string} or {string}")
@@ -45,9 +54,14 @@ public class LoginStepDefs {
     @Then("the user should get caution message {string}")
     public void theUserShouldGetCautionMessage(String expectedMessage) {
 
-        if(expectedMessage.equals(Boolean.parseBoolean(new LoginPage().userName.getAttribute("required")))){
-        Assert.assertEquals(expectedMessage,new LoginPage().userName.getAttribute("validationMessage"));}
+        if((new LoginPage().userName.getAttribute("value")).isEmpty()){
+        Assert.assertEquals(expectedMessage,new LoginPage().userName.getAttribute("validationMessage"));}else
         Assert.assertEquals(expectedMessage,new LoginPage().password.getAttribute("validationMessage"));
 
+    }
+    @When("the user clicks the reset password button")
+    public void theUserClicksTheResetPasswordButton() {
+        LoginPage loginPage = new LoginPage();
+        loginPage.resetPasswordButton.click();
     }
 }
